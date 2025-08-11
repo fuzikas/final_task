@@ -8,20 +8,20 @@ from visual import HANGMANPICS
 def symbol_hider(symbol: str) -> None:
     if game.guessing == []:
 
-        indexai = [i for i, letter in enumerate(game.word) if letter == symbol]
+        indexes = [index for index, letter in enumerate(game.word) if letter == symbol]
         game.symbol_hider()
         game.changing_to_list()
-        for i in indexai:
-            game.guessing[i] = symbol
+        for index in indexes:
+            game.guessing[index] = symbol
         game.back_to_string()
         return game.guessing
 
 
     else:
-        indexai = [i for i, letter in enumerate(game.word) if letter == symbol]
+        indexes = [index for index, letter in enumerate(game.word) if letter == symbol]
         game.changing_to_list()
-        for i in indexai:
-            game.guessing[i] = symbol
+        for index in indexes:
+            game.guessing[index] = symbol
         game.back_to_string()
         if game.guessing == game.word:
             print(f"Atspejai! zodis buvo {game.word}")
@@ -80,15 +80,21 @@ def menu() -> str | None:
         pasirinkimas = int(input("Hi! What would you like to do?  \n 1. Play \n 2. Quit \n"))
     except ValueError:
         print("Please enter a valid number.")
-        return menu()
+        menu()
 
     if pasirinkimas == 1:
         global game
         game = word_manager(random.choice(lietuviski_zodziai))
         hangman()
 
-    if pasirinkimas == 2:
-        pass
+    elif pasirinkimas == 2:
+        print("Bye bye!")
+        
+
+    elif pasirinkimas != 1 and pasirinkimas != 2:
+        print("Please enter a number between 1 and 2.")
+        menu()
+
 
 
 menu()
